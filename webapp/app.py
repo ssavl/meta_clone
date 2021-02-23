@@ -10,19 +10,18 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 # enable CORS
-CORS(app, resources={r"/api": {"origins": "*"}})  # Даем любому ip делать cross-origin-requests TODO: надо изменить!
+CORS(app)
+
+# CORS(app, resources={r"/api": {"origins": "*"}})  # Даем любому ip делать cross-origin-requests TODO: надо изменить!
 
 
 
-
-@app.route("/books", methods=['GET', 'POST'])
-def index():
-    ctx = {
+@app.route('/books', methods=['GET'])
+def all_books():
+    return jsonify({
         'status': 'success',
-        'books': BOOKS,
-    }
-    return jsonify(ctx)
-
+        'books': BOOKS
+    })
 
 
 
