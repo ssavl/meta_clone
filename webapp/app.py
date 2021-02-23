@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from db import tasks
+from db import BOOKS
 from flask_cors import CORS
 
 # configurations
@@ -15,9 +15,13 @@ CORS(app, resources={r"/api": {"origins": "*"}})  # Даем любому ip д�
 
 
 
-@app.route("/api", methods=['GET', 'POST'])
+@app.route("/books", methods=['GET', 'POST'])
 def index():
-    return jsonify({'tasks': tasks})
+    ctx = {
+        'status': 'success',
+        'books': BOOKS,
+    }
+    return jsonify(ctx)
 
 
 
